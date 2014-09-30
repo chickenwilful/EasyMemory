@@ -11,7 +11,7 @@ public class Storage
 
     static {
         keys = new HashMap<String, String>();
-        String server_address = "http://127.0.0.1/";
+        String server_address = "http://23.98.75.224/";
         keys.put("SERVER_ADDRESS", server_address);
         keys.put("LOGIN_ADDRESS", server_address + "users/login");
     }

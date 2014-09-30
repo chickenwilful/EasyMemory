@@ -31,4 +31,4 @@ def login(request):
         User.objects.get(username=username, password=password)
         return json_success_response('Successfully logged in')
     except User.DoesNotExist:
-        return json_failed_response('Incorrect username or password: ')
+        return json_failed_response('Incorrect username or password')

@@ -2,6 +2,7 @@ package com.titanium.easymemory;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,8 @@ public class FriendDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.friend_detail)).setText(mItem.id);
+            ((TextView) rootView.findViewById(R.id.friend_detail))
+                    .setText(mItem.name + " (" + mItem.relation + ")");
         }
 
         return rootView;

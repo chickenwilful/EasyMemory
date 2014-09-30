@@ -32,6 +32,7 @@ public class DummyContent {
     public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
     public static void updateItems() {
+        ITEMS.clear();
         Log.i("DummyContent", "Update items");
         JSONObject res = RequestAPI.execute("list_friend", Storage.get("username"));
         try {
@@ -52,7 +53,7 @@ public class DummyContent {
 
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.name, item);
+        ITEM_MAP.put(item.id, item);
     }
 
     /**

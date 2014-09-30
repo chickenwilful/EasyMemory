@@ -12,14 +12,18 @@
         android:text="PLAY"
         android:id="@+id/btnPlay"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:onClick="showPlay"
+        />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="MANAGE PEOPLE"
         android:id="@+id/btnManagePeople"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:onClick="showPeople"
+        />
 
 
 </LinearLayout>

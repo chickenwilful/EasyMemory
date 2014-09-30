@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.titanium.easymemory.Utility.RequestAPI;
 import com.titanium.easymemory.Utility.Storage;
+import com.titanium.easymemory.dummy.DummyContent;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -66,13 +67,15 @@ public class LoginSignupActivity extends Activity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        JSONObject response = (new RequestAPI()).execute("login", username, password);
+        JSONObject response = RequestAPI.execute("login", username, password);
 
         try {
             String message = response.getString("message");
             Log.i("LoginSignupActivity", "mesasge = " + message);
 
             if (response.getInt("success") == 1) {
+                Storage.put("username", username);
+                DummyContent.updateItems();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }

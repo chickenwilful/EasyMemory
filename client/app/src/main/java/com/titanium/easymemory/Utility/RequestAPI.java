@@ -1,7 +1,7 @@
 package com.titanium.easymemory.Utility;
 
-import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -24,37 +24,44 @@ import java.util.List;
  */
 public class RequestAPI {
 
-    public JSONObject execute(String... objects) {
+    public static JSONObject execute(String... objects) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         String request = objects[0];
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = null;
+        List<NameValuePair> nameValuePairs = null;
+
         if (request.equals("login")) {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(Storage.get("LOGIN_ADDRESS"));
-            System.out.println("LOGIN: " + Storage.get("LOGIN_ADDRESS"));
-            try {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("username", objects[1]));
-                nameValuePairs.add(new BasicNameValuePair("password", objects[2]));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                out.close();
-
-                return new JSONObject(out.toString());
-            } catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-            }
+            httppost = new HttpPost(Storage.get("LOGIN_ADDRESS"));
+            // Add your data
+            nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("username", objects[1]));
+            nameValuePairs.add(new BasicNameValuePair("password", objects[2]));
         }
+        else if (request.equals("list_friend")) {
+            httppost = new HttpPost(Storage.get("FRIEND_LIST_ADDRESS"));
+            // Add data
+            nameValuePairs = new ArrayList<NameValuePair>(1);
+            Log.i("RequestAPI", "username: " + objects[1]);
+            nameValuePairs.add(new BasicNameValuePair("username", objects[1]));
+        }
+
+        try {
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            response.getEntity().writeTo(out);
+            out.close();
+            Log.i("RequestAPI", "Response: " + out.toString());
+            return new JSONObject(out.toString());
+        } catch (Exception e) {
+            // TODO: Handle it
+        }
+
         return null;
     }
 }

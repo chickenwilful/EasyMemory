@@ -14,6 +14,7 @@ public class Storage
         String server_address = "http://23.98.75.224/";
         keys.put("SERVER_ADDRESS", server_address);
         keys.put("LOGIN_ADDRESS", server_address + "users/login");
+        keys.put("FRIEND_LIST_ADDRESS", server_address + "users/list_friend");
     }
 
     public static String get(String key) {

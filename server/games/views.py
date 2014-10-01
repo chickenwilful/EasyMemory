@@ -9,7 +9,9 @@ def game_next_step(request):
     try:
         username = request.POST['username']
         user = User.objects.get(username=username)
-    except KeyError, User.DoesNotExist:
+    except KeyError:
+        return json_invalid_request()
+    except User.DoesNotExist:
         return json_invalid_request()
 
     if user.gamecount == MAX_QUESTION:
@@ -24,6 +26,9 @@ def game_next_step(request):
 
         friends = Friend.objects.filter(user=user)
         friend_array = [friend for friend in friends]
+
+        if len(friend_array) < 2:
+            return json_failed_response("You don't have enough friends to play")
 
         id1 = random.randint(0, len(friend_array) - 1)
         id2 = id1

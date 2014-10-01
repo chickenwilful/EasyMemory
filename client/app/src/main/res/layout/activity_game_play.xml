@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Who is this?"
+        android:id="@+id/whoIsThisTitle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/imageViewQuestion"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/baby"/>
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:id="@+id/answerGridView"
+        android:layout_gravity="center_horizontal"
+        android:numColumns="2"
+        android:choiceMode="singleChoice"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:id="@+id/btnConfirmQuestion"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

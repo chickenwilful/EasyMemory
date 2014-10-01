@@ -35,6 +35,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.titanium.easymemory.FriendListActivity" />
         </activity>
+        <activity
+            android:name=".GamePlayActivity"
+            android:label="@string/title_activity_game_play" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

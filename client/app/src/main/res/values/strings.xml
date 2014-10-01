@@ -10,5 +10,6 @@
     <string name="title_activity_debug">DebugActivity</string>
     <string name="title_friend_list">Friends</string>
     <string name="title_friend_detail">Friend Detail</string>
+    <string name="title_activity_game_play">GamePlayActivity</string>
 
 </resources>

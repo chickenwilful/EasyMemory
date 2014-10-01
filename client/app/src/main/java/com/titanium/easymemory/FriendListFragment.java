@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-import com.titanium.easymemory.dummy.DummyContent;
+import com.titanium.easymemory.entity.FriendList;
 
 /**
  * A list fragment representing a list of Friends. This fragment
@@ -72,11 +72,11 @@ public class FriendListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
+        setListAdapter(new ArrayAdapter<FriendList.Friend>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                DummyContent.ITEMS));
+                FriendList.ITEMS));
     }
 
     @Override
@@ -116,7 +116,7 @@ public class FriendListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(FriendList.ITEMS.get(position).id);
     }
 
     @Override

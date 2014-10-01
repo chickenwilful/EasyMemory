@@ -56,3 +56,7 @@ target/
 # IDE
 .idea/
 *.iml
+
+# Image files
+*.jpg
+*.png

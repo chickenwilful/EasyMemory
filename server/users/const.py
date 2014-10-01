@@ -1,1 +1,0 @@
-MAX_QUESTION = 5

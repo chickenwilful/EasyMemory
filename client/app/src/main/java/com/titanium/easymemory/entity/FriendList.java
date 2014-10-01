@@ -1,8 +1,8 @@
-package com.titanium.easymemory.dummy;
+package com.titanium.easymemory.entity;
 
 import android.util.Log;
 
-import com.titanium.easymemory.Utility.RequestAPI;
+import com.titanium.easymemory.Utility.NetworkUtil;
 import com.titanium.easymemory.Utility.Storage;
 
 import org.json.JSONArray;
@@ -19,30 +19,31 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DummyContent {
+public class FriendList {
 
     /**
      * An array of sample (dummy) items.
      */
-    public static List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static List<Friend> ITEMS = new ArrayList<Friend>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static Map<String, Friend> ITEM_MAP = new HashMap<String, Friend>();
 
     public static void updateItems() {
         ITEMS.clear();
         Log.i("DummyContent", "Update items");
-        JSONObject res = RequestAPI.execute("list_friend", Storage.get("username"));
+        JSONObject res = NetworkUtil.execute("list_friend", Storage.get("username"));
         try {
             JSONArray friends = res.getJSONArray("friends");
             for(int i = 0; i < friends.length(); ++i) {
                 JSONObject friend = friends.getJSONObject(i);
-                addItem(new DummyItem(
-                        "" + i,
+                addItem(new Friend(
+                        friend.getString("id"),
                         friend.getString("name"),
-                        friend.getString("relation")
+                        friend.getString("relation"),
+                        friend.getString("img")
                 ));
             }
         }
@@ -51,7 +52,7 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(Friend item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
@@ -59,15 +60,17 @@ public class DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
+    public static class Friend {
         public String id;
         public String name;
         public String relation;
+        public String image;
 
-        public DummyItem(String id, String name, String relation) {
+        public Friend(String id, String name, String relation, String image) {
             this.id = id;
             this.name = name;
             this.relation = relation;
+            this.image = image;
         }
 
         @Override

@@ -2,14 +2,16 @@ package com.titanium.easymemory;
 
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.titanium.easymemory.dummy.DummyContent;
+import com.titanium.easymemory.Utility.NetworkUtil;
+import com.titanium.easymemory.Utility.Storage;
+import com.titanium.easymemory.entity.FriendList;
 
 /**
  * A fragment representing a single Friend detail screen.
@@ -27,7 +29,7 @@ public class FriendDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private FriendList.Friend mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,7 +46,7 @@ public class FriendDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = FriendList.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
         }
     }
 
@@ -57,6 +59,13 @@ public class FriendDetailFragment extends Fragment {
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.friend_detail))
                     .setText(mItem.name + " (" + mItem.relation + ")");
+
+            String imageUrl = Storage.get("SERVER_ADDRESS");
+            if (mItem.image.length() > 0) {
+                imageUrl += mItem.image.substring(1);
+            }
+            ((ImageView) rootView.findViewById(R.id.friend_image))
+                    .setImageBitmap(NetworkUtil.getImageFromUrl(imageUrl));
         }
 
         return rootView;

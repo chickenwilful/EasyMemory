@@ -36,4 +36,5 @@ def game_next_step(request):
             'name1': friend_array[id1].name,
             'name2': friend_array[id2].name,
             'correct': correct,
+            'finished': 0,
         })
